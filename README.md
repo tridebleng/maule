@@ -19,10 +19,10 @@ LIFETIME: 150K
 - Jika mendapatkan error pada servis dalam jangka panjang, bisa restart servis yang dead.
 
 ### INSTALL SCRIPT
-<pre><code>apt install -y && apt update -y && apt upgrade -y && apt install lolcat -y && gem install lolcat && wget -q https://www.maule.site/maula.sh && chmod +x yogzasu.sh && screen -S install ./maula.sh</code></pre>
+<pre><code>apt install -y && apt update -y && apt upgrade -y && apt install lolcat -y && gem install lolcat && wget -q https://www.artamaulana.site/maula.sh && chmod +x maula.sh && screen -S install ./maula.sh</code></pre>
 
 ### PERINTAH UPDATE 
-<pre><code>wget https://www.maule.site/up.sh && chmod +x up.sh && ./up.sh</code></pre>
+<pre><code>wget https://www.artamaulana.site/up.sh && chmod +x up.sh && ./up.sh</code></pre>
 
 ### TESTED ON OS 
 - UBUNTU 20.04.05
