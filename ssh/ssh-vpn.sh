@@ -93,7 +93,7 @@ wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/tridebleng/maul
 mkdir -p /home/vps/public_html
 /etc/init.d/nginx restart
 cd
-wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/tridebleng/maule/main/ssh/newudpgw"
+wget -q -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/artanodrop/dxavier/main/ssh/newudpgw"
 chmod +x /usr/bin/badvpn-udpgw
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500' /etc/rc.local
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500' /etc/rc.local
