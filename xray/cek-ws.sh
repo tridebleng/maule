@@ -1,4 +1,6 @@
 #!/bin/bash
+#Decrypted By YADDY D PHREAKER
+#!/bin/bash
 DF='\e[39m'
 Bold='\e[1m'
 Blink='\e[5m'
@@ -30,12 +32,10 @@ function con() {
     fi
 }
 echo -n > /tmp/other.txt
-data=( `cat /etc/xray/config.json | grep '#vm#' | cut -d ' ' -f 2 | sort | uniq`);
-echo -e "\033[1;93m┌──────────────────────────────────────────┐\033[0m"
-echo -e "              VMESS USER LOGIN            $NC"
-echo -e "\033[1;93m└──────────────────────────────────────────┘\033[0m"
-echo -e "   User"     "       Last Login"    "  Usage"   " Total IP"
-echo -e "\033[1;91m┌──────────────────────────────────────────┐\033[0m"
+data=( `cat /etc/xray/config.json | grep '###' | cut -d ' ' -f 2 | sort | uniq`);
+echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e " \e[1;97;101m           CEK VMESS ACCOUNT            \e[0m"
+echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 for akun in "${data[@]}"
 do
 if [[ -z "$akun" ]]; then
@@ -58,20 +58,26 @@ jum=$(cat /tmp/ipvmess.txt)
 if [[ -z "$jum" ]]; then
 echo > /dev/null
 else
+#iplimit=$(cat /etc/kytxz/limit/vmess/ip/${akun})
 jum2=$(cat /tmp/ipvmess.txt | wc -l)
 byte=$(cat /etc/vmess/${akun})
 lim=$(con ${byte})
 wey=$(cat /etc/limit/vmess/${akun})
 gb=$(con ${wey})
 lastlogin=$(cat /var/log/xray/access.log | grep -w "$akun" | tail -n 500 | cut -d " " -f 2 | tail -1)
-printf "  %-13s %-7s %-8s %2s\n"   "${akun}" "$lastlogin"  " ${gb}/${lim}"   "$jum2";
+echo -e " \033[1;36m┌──────────────────────────────────────┐\033[0m"
+printf "  %-13s %-7s %-8s %2s\n"   "  USEENAME : ${akun}" | lolcat
+printf "  %-13s %-7s %-8s %2s\n" "  LOGIN    : $lastlogin" | lolcat 
+printf "  %-13s %-7s %-8s %2s\n" "  LIMIT GB : ${gb}/${lim}" | lolcat  
+#printf "  %-13s %-7s %-8s %2s\n" "  LIMIT IP : $jum2/$iplimit" | lolcat;
+echo -e " \033[1;36m└──────────────────────────────────────┘\033[0m"
 fi 
 rm -rf /tmp/ipvmess.txt
 done
 rm -rf /tmp/other.txt
 echo ""
-echo -e "\033[1;91m└──────────────────────────────────────────┘\033[0m"
-echo -e "\033[1;93m┌──────────────────────────────────────────┐\033[0m"
-echo -e "        Autoscript Mod by ARTA MAULANA        "
-echo -e "\033[1;93m└──────────────────────────────────────────┘\033[0m"
+echo -e "\033[1;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo ""
+read -n 1 -s -r -p "Press any key to back on menu"
+
+menu-vmess
