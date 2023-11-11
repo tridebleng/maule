@@ -19,6 +19,7 @@ email=Arta1ove@gmail.com
 curl -sS https://raw.githubusercontent.com/tridebleng/maule/main/ssh/password | openssl aes-256-cbc -d -a -pass pass:scvps07gg -pbkdf2 > /etc/pam.d/common-password
 chmod +x /etc/pam.d/common-password
 cd
+# Edit file /etc/systemd/system/rc-local.service
 cat > /etc/systemd/system/rc-local.service <<-END
 [Unit]
 Description=/etc/rc.local
@@ -33,12 +34,22 @@ SysVStartPriority=99
 [Install]
 WantedBy=multi-user.target
 END
+
+# nano /etc/rc.local
 cat > /etc/rc.local <<-END
+#!/bin/sh -e
+# rc.local
+# By default this script does nothing.
 exit 0
 END
+
+# Ubah izin akses
 chmod +x /etc/rc.local
+
+# enable rc local
 systemctl enable rc-local
 systemctl start rc-local.service
+
 echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
 sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
 apt update -y
