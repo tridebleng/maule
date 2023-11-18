@@ -383,14 +383,14 @@ echo -e " ${z}╭═════════════════════
 echo -e " ${z}│$NC$r ⇲ $NC${z} SYSTEM OS     $blue=$NC $MODEL${NC}"
 echo -e " ${z}│$NC$r ⇲ $NC${z} ISP           $blue=$NC $ISP${NC}"
 #echo -e " ${z}│$NC$r ⇲ $NC${z} SERVER RAM    $blue=$NC $RAM MB / $USAGERAM MB ${NC}"
-echo -e " ${z}│$NC$r ⇲ $NC${z} SERVER RAM    $blue=$NC 1800 MB${NC}"
+echo -e " ${z}│$NC$r ⇲ $NC${z} SERVER RAM    $blue=$NC 2000 MB${NC}"
 echo -e " ${z}│$NC$r ⇲ $NC${z} UPTIME SERVER $blue=$NC $uptime${NC}"
 echo -e " ${z}│$NC$r ⇲ $NC${z} DATE          $blue=$NC $DATEVPS${NC}"
 echo -e " ${z}│$NC$r ⇲ $NC${z} TIME          $blue=$NC $TIMEZONE${NC}"
 echo -e " ${z}│$NC$r ⇲ $NC${z} IP VPS        $blue=$NC $MYIP${NC}"
 echo -e " ${z}│$NC$r ⇲ $NC${z} DOMAIN        $blue=$NC $domain${NC}"
 echo -e " ${z}╰══════════════════════════════════════════════════════════╯${NC}"
-echo -e "                ${KIRI} ${CYAN}INFORMATION ACCOUNT${NC} ${KANAN}"
+echo -e "                ${KIRI} ${BIYellow}INFORMATION ACCOUNT${NC} ${KANAN}"
 echo -e "       ───────────────────────────────────────────────${NC}" | lolcat 
 echo -e "           ${CYAN}SSH/OPENVPN${NC}    $y=$NC $ssh1${NC}" "$a"
 echo -e "           ${CYAN}VMESS/WS/GRPC${NC}  $y=$NC $vma$NC" "$a"
@@ -398,10 +398,10 @@ echo -e "           ${CYAN}VLESS/WS/GRPC${NC}  $y=$NC $vla$NC" "$a"
 echo -e "           ${CYAN}TROJAN/WS/GRPC${NC} $y=$NC $tra${NC}" "$a"
 echo -e "           ${CYAN}SHADOW/WS/GRPC${NC} $y=$NC $ssa${NC} $a"
 echo -e "       ───────────────────────────────────────────────${NC}" | lolcat 
-echo -e "          ${z}༶ ━━━━━ [ Bandwidth Monitoring ] ━━━━━ ༶   ${NC}" 
+echo -e "          ${BIYellow}༶ ━━━━━ [ Bandwidth Monitoring ] ━━━━━ ༶   ${NC}" 
 echo -e ""
-echo -e "\033[0m        ${z}Today ($DATEVPS)       Monthly ($(date +%B/%Y))${NC}  "
-echo -e "\033[0m       ↓↓ Total: ${BIRed}$daily_usage${NC}         ↓↓ Total: $monthly_usage${NC}   "
+echo -e "\033[0m       ${BIGreen}Today ($DATEVPS)        Monthly ($(date +%B/%Y))${NC}  "
+echo -e "\033[0m       ↓↓ Total: ${BIRed}$daily_usage${NC}         ↓↓ Total: ${BIRed}$monthly_usage${NC}   "
 echo -e " ${z}╭════════════════╮╭══════════════════╮╭════════════════════╮${NC}"
 echo -e " ${z}│ ${NC}${z} SSH$NC : $resssh" "        ${z} NGINX$NC : $resngx" "        ${z} XRAY$NC : $resv2r      $NC${z}│$NC" 
 echo -e " ${z}│ ${NC}${z} WS-ePRO$NC : $ressshws" "    ${z} DROPBEAR$NC : $resdbr" "     ${z} HAPROXY$NC : $resst   $NC${z}│$NC" 
@@ -413,11 +413,10 @@ echo -e " ${z}│$NC [${r}03${NC}]${CYAN} VLESS MENU$NC   ${z}│$NC [${r}10${NC
 echo -e " ${z}│$NC [${r}04${NC}]${CYAN} TROJAN MENU$NC  ${z}│$NC [${r}11${NC}]${CYAN} SPEEDTEST$NC   ${z} │$NC [${r}18${NC}]${CYAN} DOMAIN      $NC${z}│$NC" 
 echo -e " ${z}│$NC [${r}05${NC}]${CYAN} SHADOW MENU$NC  ${z}│$NC [${r}12${NC}]${CYAN} RUNNING$NC     ${z} │$NC [${r}19${NC}]${CYAN} CERT SSL    $NC${z}│$NC"
 echo -e " ${z}│$NC [${r}06${NC}]${CYAN} TRIALL MENU$NC  ${z}│$NC [${r}13${NC}]${CYAN} VPS INFO$NC    ${z} │$NC [${r}20${NC}]${CYAN} INS. UDP    $NC${z}│$NC"
-echo -e " ${z}│$NC [${r}07${NC}]${CYAN} UPDATE SCRIPT$NC${z}│$NC [${r}14${NC}]${CYAN} BOT NOTIF$NC   ${z} │$NC [${r}21${NC}]${CYAN} CLEAR CACHE $NC${z}│$NC"
+echo -e " ${z}│$NC [${r}07${NC}]${CYAN} UBAH BANNER   $NC${z}│$NC [${r}14${NC}]${CYAN} BOT NOTIF$NC   ${z} │$NC [${r}21${NC}]${CYAN} CLEAR CACHE $NC${z}│$NC"
 echo -e " ${z}│$NC [${r}22${NC}]${CYAN} SETTING MENU$NC ${z}│$NC [${r}23${NC}]${CYAN} BOT BACKUP$NC  ${z} │$NC [${r}24${NC}]${CYAN} BOT PANEL   $NC${z}│$NC"
 echo -e " ${z}│                                                          $NC${z}│$NC"
 echo -e " ${z}│$NC [${r}00${NC}]${CYAN} BACK TO EXIT MENU$NC ${KANAN} \E[0m\033[0;34m                              $NC${z}│$NC"
-echo -e " ${z}│$NC [${r}99${NC}]${CYAN} UBAH BANNER VPS$NC   ${KANAN} \E[0m\033[0;34m                              $NC${z}│$NC"
 echo -e " ${z}╰══════════════════════════════════════════════════════════╯${NC}"
 DATE=$(date +'%d %B %Y')
 datediff() {
@@ -447,7 +446,7 @@ case $opt in
 04 | 4) clear ; menu-trojan ;;
 05 | 5) clear ; shadowsocks ;;
 06 | 6) clear ; menu-trial ;;
-07 | 7) clear ; up ;;
+07 | 7) clear ; nano /etc/issue.net ;;
 08 | 8) clear ; xp ;;
 09 | 9) clear ; auto-reboot ;;
 10) clear ; about ;;
@@ -465,7 +464,7 @@ case $opt in
 22) clear ; menu-set ;;
 23) clear ; mbot ;;
 24) clear ; add-bot-panel ;;
-99) clear ; nano /etc/issue.net ;;
+99) clear ; up ;;
 0) clear ; menu ;;
 00) exit ;;
 *) echo -e "" ; echo "Lu salah tekan bro" ; sleep 1 ; menu ;;
