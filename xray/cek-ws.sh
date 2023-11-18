@@ -12,8 +12,6 @@ BlueCyan="\e[5;36m"
 Green_background="\033[42;37m"
 Red_background="\033[41;37m"
 Suffix="\033[0m"
-
-fi
 DF='\e[39m'
 Bold='\e[1m'
 Blink='\e[5m'
