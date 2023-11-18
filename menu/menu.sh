@@ -122,6 +122,11 @@ TIMEZONE=$(printf '%(%H:%M:%S)T')
 SERONLINE=$(uptime -p | cut -d " " -f 2-10000)
 clear
 #Download/Upload today
+daily_usage=$(vnstat -d --oneline | awk -F\; '{print $6}' | sed 's/ //')
+monthly_usage=$(vnstat -m --oneline | awk -F\; '{print $11}' | sed 's/ //')
+DATE=`date -d "0 days" +"%Y-%m-%d"`
+clear
+#Download/Upload today
 dtoday="$(vnstat -i eth0 | grep "today" | awk '{print $2" "substr ($3, 1, 1)}')"
 utoday="$(vnstat -i eth0 | grep "today" | awk '{print $5" "substr ($6, 1, 1)}')"
 ttoday="$(vnstat -i eth0 | grep "today" | awk '{print $8" "substr ($9, 1, 1)}')"
@@ -391,6 +396,10 @@ echo -e "           ${CYAN}VMESS/WS/GRPC${NC}  $y=$NC $vma$NC" "$a"
 echo -e "           ${CYAN}VLESS/WS/GRPC${NC}  $y=$NC $vla$NC" "$a"
 echo -e "           ${CYAN}TROJAN/WS/GRPC${NC} $y=$NC $tra${NC}" "$a"
 echo -e "           ${CYAN}SHADOW/WS/GRPC${NC} $y=$NC $ssa${NC} $a"
+echo -e "    ${z}༶ ━━━━━ [ Bandwidth Monitoring ] ━━━━━ ༶   ${NC}" 
+echo -e ""
+echo -e "\033[0m  ${z}Today ($DATEVPS)       Monthly ($(date +%B/%Y))${NC}  "
+echo -e "\033[0m  ↓↓ Total: ${BIRed}$daily_usage${NC}         ↓↓ Total: $monthly_usage${NC}   "
 echo -e "       ───────────────────────────────────────────────${NC}" | lolcat 
 echo -e "               ${KIRI} ${CYAN}SCRIPT MULTI BY ARTA M${NC} ${KANAN}"
 echo -e " ${z}╭════════════════╮╭══════════════════╮╭════════════════════╮${NC}"
