@@ -433,7 +433,7 @@ if [ $exp \< 1000 ];
 then
 echo -e "   $z│$NC License      : ${GREEN}$sisa_hari$NC Days Tersisa $NC"
 else
-    datediff "$Exp" "$DATE"
+    datediff "$DATE"
 fi;
 echo -e " ${z}╰══════════════════════════════════════════════════════════╯${NC}" | lolcat
 echo " "
