@@ -424,7 +424,7 @@ datediff() {
     d2=$(date -d "$2" +%s)
     echo -e " ${z}│${NC}${z}Expiry Script $blue=${NC} ${green}$exp ${NC}( ${r}$(( (d1 - d2) / 86400 )) ${NC}Days ) $NC"
 }
-mai="datediff "$Exp" "$DATE""
+mai="datediff "$DATE""
 echo -e " ${z}╭══════════════════════════════════════════════════════════╮${NC}" | lolcat
 echo -e " ${z}│${NC}${z}Version       $blue=${NC} V3.0 Premium${NC}"
 echo -e " ${z}│${NC}${z}User          $blue=${NC}\033[1;36m $Name \e[0m"
