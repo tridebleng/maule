@@ -377,7 +377,7 @@ else
 fi
 clear
 echo -e " ${z}╭══════════════════════════════════════════════════════════╮${NC}" | lolcat
-echo -e " ${z}│$NC\033[41m         Welcome To Script Premium ARTA M TUNNEL          $NC${z}│$NC" | lolcat
+echo -e " ${z}│$NC\033[41m         Welcome To Script Premium ARTA M TUNNEL          $NC${z}│$NC"
 echo -e " ${z}╰══════════════════════════════════════════════════════════╯${NC}" | lolcat
 echo -e " ${z}╭══════════════════════════════════════════════════════════╮${NC}" | lolcat
 echo -e " ${z}│$NC$r ⇲ $NC${z} SYSTEM OS     $blue=$NC $MODEL${NC}"
@@ -424,7 +424,7 @@ datediff() {
     d2=$(date -d "$2" +%s)
     echo -e " ${z}│${NC}${z}Expiry Script $blue=${NC} ${green}$exp ${NC}( ${r}$(( (d1 - d2) / 86400 )) ${NC}Days ) $NC"
 }
-mai="datediff "$DATE""
+mai="datediff "$Exp "$DATE""
 echo -e " ${z}╭══════════════════════════════════════════════════════════╮${NC}" | lolcat
 echo -e " ${z}│${NC}${z}Version       $blue=${NC} V3.0 Premium${NC}"
 echo -e " ${z}│${NC}${z}User          $blue=${NC}\033[1;36m $Name \e[0m"
@@ -433,7 +433,7 @@ if [ $exp \< 1000 ];
 then
 echo -e "   $z│$NC License      : ${GREEN}$sisa_hari$NC Days Tersisa $NC"
 else
-    datediff "$DATE"
+    datediff "$Exp" "$DATE"
 fi;
 echo -e " ${z}╰══════════════════════════════════════════════════════════╯${NC}" | lolcat
 echo " "
