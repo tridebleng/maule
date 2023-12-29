@@ -31,6 +31,7 @@ LIGHT='\033[0;37m'
 grenbo="\e[92;1m"
 red() { echo -e "\\033[32;1m${*}\\033[0m"; }
 # Getting
+ssh1="$(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd | wc -l)"
 export CHATID="5795571992"
 export KEY="6351704520:AAEG3kwRGOUT4ta1e_q904v1zd-NtLFdXLE"
 export TIME="10"
