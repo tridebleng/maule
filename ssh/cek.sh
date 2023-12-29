@@ -38,7 +38,7 @@ done
 echo -e "\033[1;93m└──────────────────────────────────────────┘\033[0m" | lolcat
 echo " "
 echo -e "\033[1;93m┌──────────────────────────────────────────┐\033[0m" | lolcat
-echo "    ID  |  Username  |  IP Address"; | lolcat
+echo "    ID  |  Username  |  IP Address";
 echo -e "\033[1;93m└──────────────────────────────────────────┘\033[0m" | lolcat
 cat $LOG | grep -i sshd | grep -i "Accepted password for" > /tmp/login-db.txt
 data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
@@ -57,7 +57,7 @@ echo -e "\033[1;93m└───────────────────�
 if [ -f "/etc/openvpn/server/openvpn-tcp.log" ]; then
 echo ""
 echo -e "\033[1;93m┌──────────────────────────────────────────┐\033[0m" | lolcat
-echo "    Username  |  IP Address  |  Connected"; | lolcat
+echo "    Username  |  IP Address  |  Connected";
 echo -e "\033[1;93m└──────────────────────────────────────────┘\033[0m" | lolcat
             cat /etc/openvpn/server/openvpn-tcp.log | grep -w "^CLIENT_LIST" | cut -d ',' -f 2,3,8 | sed -e 's/,/      /g' > /tmp/vpn-login-tcp.txt
             cat /tmp/vpn-login-tcp.txt
@@ -67,7 +67,7 @@ echo -e "\033[1;93m└───────────────────�
 if [ -f "/etc/openvpn/server/openvpn-udp.log" ]; then
 echo " "
 echo -e "\033[1;93m┌──────────────────────────────────────────┐\033[0m" | lolcat
-echo "    Username  |  IP Address  |  Connected"; | lolcat
+echo "    Username  |  IP Address  |  Connected";
 echo -e "\033[1;93m└──────────────────────────────────────────┘\033[0m"
             cat /etc/openvpn/server/openvpn-udp.log | grep -w "^CLIENT_LIST" | cut -d ',' -f 2,3,8 | sed -e 's/,/      /g' > /tmp/vpn-login-udp.txt
             cat /tmp/vpn-login-udp.txt
@@ -75,7 +75,7 @@ fi
 echo -e "\033[1;93m└──────────────────────────────────────────┘\033[0m" | lolcat
 echo "";
 echo ""
-read -n 1 -s -r -p "Press any key to back on menu"
+read -n 1 -s -r -p "Press any key to back on menu ssh"
 
-menu
+menu-ssh
 
