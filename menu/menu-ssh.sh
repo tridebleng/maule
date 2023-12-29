@@ -68,7 +68,6 @@ clear
 #Domain
 domain=$(cat /etc/xray/domain)
 
-else
 if [ "$Isadmin" = "Pro" ]; then
 uis="${GREEN} ┌───────────────────────────────────────┐
    ꜱᴄʀɪᴘᴛ : PREMIUM         ᴠᴇʀꜱɪᴏɴ : $pak
