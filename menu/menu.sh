@@ -383,7 +383,7 @@ echo -e " ${z}╭═════════════════════
 echo -e " ${z}│$NC$r ⇲ $NC${z} SYSTEM OS     $blue=$NC $MODEL${NC}"
 echo -e " ${z}│$NC$r ⇲ $NC${z} ISP           $blue=$NC $ISP${NC}"
 #echo -e " ${z}│$NC$r ⇲ $NC${z} SERVER RAM    $blue=$NC $RAM MB ${NC}"
-echo -e " ${z}│$NC$r ⇲ $NC${z} SERVER RAM    $blue=$NC 2048 MB${NC}"
+echo -e " ${z}│$NC$r ⇲ $NC${z} SERVER RAM    $blue=$NC 1024 MB${NC}"
 echo -e " ${z}│$NC$r ⇲ $NC${z} UPTIME SERVER $blue=$NC $uptime${NC}"
 echo -e " ${z}│$NC$r ⇲ $NC${z} DATE          $blue=$NC $DATEVPS${NC}"
 echo -e " ${z}│$NC$r ⇲ $NC${z} TIME          $blue=$NC $TIMEZONE${NC}"
