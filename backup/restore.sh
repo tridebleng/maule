@@ -1,43 +1,63 @@
 #!/bin/bash
-# SL
-# ==========================================
-# Color
-RED='\033[0;31m'
+
+#COLOR CODE
 NC='\033[0m'
-GREEN='\033[0;32m'
-ORANGE='\033[0;33m'
-BLUE='\033[0;34m'
-PURPLE='\033[0;35m'
-CYAN='\033[0;36m'
-LIGHT='\033[0;37m'
-# ==========================================
-# Getting
-clear
-figlet "Restore" | lolcat
-echo "This Feature Can Only Be Used According To Vps Data With This Autoscript"
-echo "Please input link to your vps data backup file."
-echo "You can check it on your email if you run backup data vps before."
-read -rp "Link File: " -e url
-wget -O backup.zip "$url"
-unzip backup.zip
-rm -f backup.zip
+DEFBOLD='\e[39;1m'
+RB='\e[31;1m'
+GB='\e[32;1m'
+YB='\e[33;1m'
+BB='\033[0;36m'
+MB='\e[0;1m'
+CB='\e[35;1m'
+WB='\e[37;1m'
+domain=$(cat /etc/xray/domain)
+IP=$(wget -qO- ipinfo.io/ip)
+date=$(date +"%Y-%m-%d")
+time=$(date +'%H:%M:%S')
+# Restore User
+echo -e "$banner" | lolcat
+echo -e "$info"
+echo -e "    ${BB}┌───────────────────────────────────────┐${NC}" | lolcat
+echo -e "    ${WB}        ──── [ ʀᴇꜱᴛᴏʀᴇ ᴜꜱᴇʀ ] ────        ${NC}" | lolcat
+echo -e "    ${BB}└───────────────────────────────────────┘${NC}" | lolcat
+echo -e ""
+read -p "     ʟɪɴᴋ ʙᴀᴄᴋᴜᴘ : " link
+if [[ $link == "" ]]; then
+echo ""
+echo -e "    ${RB} ʏᴏᴜ ᴘʀᴇꜱꜱᴇᴅ ᴡʀᴏɴɢ${NC}"
+menu
+fi
 sleep 1
-echo Start Restore
-cd /root/backup
-cp passwd /etc/
-cp group /etc/
-cp shadow /etc/
-cp gshadow /etc/
-cp chap-secrets /etc/ppp/
-cp passwd1 /etc/ipsec.d/passwd
-cp -r crot /var/lib/
-cp -r sstp /home/
-cp -r xray /etc/
-cp -r trojan-go /etc/
-cp -r shadowsocksr /usr/local/
-cp -r public_html /home/vps/
-cp crontab /etc/
-strt
-rm -rf /root/backup
-rm -f backup.zip
-echo "Restore Berhasil!!!" | lolcat
+echo -e "    ${GB} [ɪɴꜰᴏ] ꜱᴛᴀʀᴛ ʀᴇꜱᴛᴏʀᴇ${NC}"
+# Create Restore Folder
+mkdir -p /root/.restore
+cd /root/.restore
+wget -q -O $IP-backup.zip "$link"
+unzip $IP-backup.zip > /dev/null 2>&1
+# Restore SSH
+cp -r /root/.restore/ssh/passwd /etc/passwd  &> /dev/null
+cp -r /root/.restore/ssh/group /etc/group  &> /dev/null
+cp -r /root/.restore/ssh/shadow /etc/shadow  &> /dev/null
+cp -r /root/.restore/ssh/gshadow /etc/gshadow  &> /dev/null
+# Restore Xray
+cp -r /root/.restore/xray/config.json /usr/local/etc/xray/config.json  &> /dev/null
+
+# Restart Service
+systemctl restart ssh
+systemctl restart xray
+echo -e "    ${GB} [ɪɴꜰᴏ] ꜱᴜᴄᴄᴇꜱꜱ ʀᴇꜱᴛᴏʀᴇ${NC}"
+sleep 1
+
+clear
+cd
+rm -rf /root/.restore > /dev/null 2>&1
+echo -e "$banner" | lolcat
+echo -e "$info"
+echo -e "    ${BB}┌───────────────────────────────────────┐${NC}" | lolcat
+echo -e "    ${WB}        ──── [ ʀᴇꜱᴛᴏʀ ᴜꜱᴇʀ ] ────        ${NC}" | lolcat
+echo -e "    ${BB}└───────────────────────────────────────┘${NC}" | lolcat
+echo -e "    ${GB}           ꜱᴜᴄᴄᴇꜱꜱ ʀᴇꜱᴛᴏʀᴇᴅ ᴜꜱᴇʀ           ${NC}"
+echo -e "    ${BB} ────────────────────────────────────────${NC}" | lolcat
+echo -e ""
+read -n 1 -s -r -p "     ᴘʀᴇꜱꜱ ᴀɴʏ ᴋᴇʏ ᴛᴏ ʙᴀᴄᴋ ᴏɴ ᴍᴇɴᴜ"
+menu
