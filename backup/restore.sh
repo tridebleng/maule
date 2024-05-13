@@ -40,7 +40,7 @@ cp -r /root/.restore/ssh/group /etc/group  &> /dev/null
 cp -r /root/.restore/ssh/shadow /etc/shadow  &> /dev/null
 cp -r /root/.restore/ssh/gshadow /etc/gshadow  &> /dev/null
 # Restore Xray
-cp -r /root/.restore/xray/config.json /usr/local/etc/xray/config.json  &> /dev/null
+cp -r /root/.restore/xray/config.json /etc/xray/config.json  &> /dev/null
 
 # Restart Service
 systemctl restart ssh
