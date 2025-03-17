@@ -60,23 +60,6 @@ function val_user() {
 }
 
 # Validation Access Script
-function val_script() {
-  date_server=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
-  date_list=$(date +"%Y-%m-%d" -d "$date_server")
-  IP=$(cat /var/tmp/.ip)
-  user_exp=$(cat /var/tmp/.izin_ip | grep $IP | awk '{print $3}')
-  if [[ $(date -d "$date_list" +%s) -lt $(date -d "$user_exp" +%s) ]]; then
-      echo -ne
-  else
-      clear
-      echo -e "    ${GB}┌─────────────────────────────────────┐${NC}" | lolcat
-      echo -e "    ${RB}       ɪᴘ ɴᴏᴛ ʀᴇɢɪꜱᴛᴇʀ ᴀᴜᴛᴏꜱᴄʀɪᴘᴛ       ${NC}"
-      echo -e "    ${GB}└─────────────────────────────────────┘${NC}" | lolcat
-      echo -e ""
-      read -n 1 -s -r -p "     ᴘʀᴇꜱꜱ ᴀɴʏ ᴋᴇʏ ᴛᴏ ʙᴀᴄᴋ ᴏɴ ᴍᴇɴᴜ"
-      menu
-  fi
-}
 
 # Check Vmess WS
 function cek-vmessws() {
